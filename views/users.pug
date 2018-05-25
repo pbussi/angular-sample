@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1="Usuarios"
+  ul
+  each val, index in marcas
+    li= val.codigo + ': ' + val.marca
