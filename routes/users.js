@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql'); 
+var mysql = require('mysql');
+var request = require("request");
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-	var con = mysql.createConnection({
+
+/*	var con = mysql.createConnection({
   			host: "localhost",
   			user: "root",
   			password: "",
@@ -22,5 +24,22 @@ con.connect(function(err) {
 
  // res.send('respond with a resource');
 });
+*/
 
+
+
+
+var url = "http://www.lamarca.com.ar/lamarca/web/index.php/modelos/31";
+
+request({
+    url: url,
+    json: true
+}, function (error, response, body) {
+
+    if (!error && response.statusCode === 200) {
+			console.log(response);
+      res.render('users', { marcas: body });
+    }
+});
+});
 module.exports = router;
